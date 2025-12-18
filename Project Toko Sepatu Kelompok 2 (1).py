@@ -1,40 +1,40 @@
-import math #untuk menghitung akar n pd jump search
-import time #untuk waktu 
+import math 
+import time 
 import pandas as pd
 
 # ------------------- LINEAR SEARCH -------------------
-def LinearSearchFull(arr, x): # arr untuk daftar data, x data yg mau di cari
-    n = len(arr) # panjang data dari arr
-    for i in range(len(arr)): #looping dari data awal smpe akhir
-        if arr[i] == x: #elemen = data yang dicari
-            return i #mengembalikan posisi index saat data sdh ditemukan
-    return None #data tidak ditemukan
+def LinearSearchFull(arr, x): 
+    n = len(arr) 
+    for i in range(len(arr)):
+        if arr[i] == x: 
+            return i 
+    return None 
 
 
 # ------------------- LINEAR SEARCH (untuk Jump Search) -------------------
-def LinearSearch(arr, x, loc): # loc = posisi awal block dlm array
-    n = len(arr) #panjang array
+def LinearSearch(arr, x, loc): 
+    n = len(arr) 
     for i in range(n):
         if arr[i] == x: 
-            return i + loc #indeks sebenarnya dalam array utama
+            return i + loc 
     return None
 
 # ------------------- JUMP SEARCH -------------------
-def JumpSearch(arr, x): # arr = daftar data, x = data yg di cari
+def JumpSearch(arr, x): 
     n = len(arr) 
-    m = int(math.sqrt(n)) #penghitungan banyak block
-    if m == 0: #ketika data kosong
-        m = 1 #block dibuat sebanyak 1
+    m = int(math.sqrt(n)) 
+    if m == 0: 
+        m = 1 
 
     i = 0 
-    while i < n and arr[min(i + m - 1, n - 1)] < x: #mengecek elemen terakhir block , jika < maka lanjut ke block selanjutnya
+    while i < n and arr[min(i + m - 1, n - 1)] < x: 
         #print(f"Processing Block = {arr[i:min(i+m, n)]}")
-        i += m #lanjut ke block berikutnya
+        i += m 
 
-    if i >= n: #data tidak ditemukan setelah melewati semua block
+    if i >= n: 
         return None
 
-    B = arr[i : min(i + m, n)] #block dmn tempat data ditemukan
+    B = arr[i : min(i + m, n)] 
     #print(f"[Processing Block = {B}]")
 
     return LinearSearch(B, x, i)
@@ -42,10 +42,10 @@ def JumpSearch(arr, x): # arr = daftar data, x = data yg di cari
 
 # ------------------- BINARY SEARCH -------------------
 def BinarySearch(arr, x): 
-    low, high = 0, len(arr) - 1 #penentuan index terakhir
+    low, high = 0, len(arr) - 1 
 
     while low <= high:
-        mid = (low + high) // 2 #penentuan nilai tengah
+        mid = (low + high) // 2
 
         if arr[mid] == x:
             return mid
@@ -54,7 +54,7 @@ def BinarySearch(arr, x):
         else:
             high = mid - 1
 
-    return None #data tdk ditemukan
+    return None 
 
 
 # ------------------- LOAD EXCEL -------------------
@@ -129,4 +129,5 @@ if __name__ == "__main__":
     print("=========== WAKTU EKSEKUSI ===========")
     print(f"Linear Search : {int(waktu_lin * 1_000_000)} mikrodetik")
     print(f"Jump Search   : {int(waktu_jump * 1_000_000)} mikrodetik")
+
     print(f"Binary Search : {int(waktu_bin * 1_000_000)} mikrodetik")
