@@ -131,3 +131,4 @@ if __name__ == "__main__":
     print(f"Jump Search   : {int(waktu_jump * 1_000_000)} mikrodetik")
 
     print(f"Binary Search : {int(waktu_bin * 1_000_000)} mikrodetik")
+
